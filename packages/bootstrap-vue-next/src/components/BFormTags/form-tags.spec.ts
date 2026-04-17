@@ -822,6 +822,25 @@ describe('form-tags', () => {
     })
   })
 
+  describe('tag removal', () => {
+    it('emits new array reference when removing a tag', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {modelValue: ['apple', 'orange', 'banana']},
+      })
+
+      // Find and click the remove button on the first tag
+      const tag = wrapper.findComponent(BFormTag)
+      await tag.find('button').trigger('click')
+      await nextTick()
+
+      const emitted = wrapper.emitted('update:modelValue')
+      expect(emitted).toBeDefined()
+      const lastEmission = emitted![emitted!.length - 1][0] as string[]
+      expect(lastEmission).toEqual(['orange', 'banana'])
+      expect(lastEmission).not.toBe(wrapper.vm.$props.modelValue)
+    })
+  })
+
   describe('removeOnDelete behavior', () => {
     it('does not remove tag on Backspace by default', async () => {
       const wrapper = mount(BFormTags, {

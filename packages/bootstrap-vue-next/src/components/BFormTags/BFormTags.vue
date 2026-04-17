@@ -414,7 +414,7 @@ const removeTag = (tag?: string): void => {
   const tagIndex = tags.value.indexOf(tag?.toString() ?? '')
   if (tagIndex === -1) return
   lastRemovedTag.value = tags.value.splice(tagIndex, 1).toString()
-  modelValue.value = tags.value
+  modelValue.value = [...tags.value]
 }
 
 defineExpose({
