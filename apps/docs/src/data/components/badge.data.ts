@@ -49,7 +49,7 @@ export default {
       emits: {},
       slots: {
         default: {
-          description: 'Content to place in the badge'
+          description: 'Content to place in the badge',
           scope: {},
         },
       } satisfies SlotRecord<keyof BBadgeSlots>,
