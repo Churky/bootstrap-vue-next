@@ -955,4 +955,31 @@ describe('dropdown', () => {
       expect($bbutton.props('size')).toBe('md')
     })
   })
+
+  describe('toggleAttrs prop', () => {
+    it('applies toggleAttrs to the main button when not split', () => {
+      const wrapper = mount(BDropdown, {
+        props: {toggleAttrs: {'data-testid': 'my-toggle', 'aria-label': 'Custom label'}},
+      })
+      const $bbutton = wrapper.getComponent(BButton)
+      expect($bbutton.attributes('data-testid')).toBe('my-toggle')
+      expect($bbutton.attributes('aria-label')).toBe('Custom label')
+    })
+
+    it('does not apply toggleAttrs to the main button when split', () => {
+      const wrapper = mount(BDropdown, {
+        props: {split: true, toggleAttrs: {'data-testid': 'my-toggle'}},
+      })
+      const [$mainButton] = wrapper.findAllComponents(BButton)
+      expect($mainButton.attributes('data-testid')).toBeUndefined()
+    })
+
+    it('applies toggleAttrs to the split toggle button when split', () => {
+      const wrapper = mount(BDropdown, {
+        props: {split: true, toggleAttrs: {'data-testid': 'split-toggle'}},
+      })
+      const [, $splitButton] = wrapper.findAllComponents(BButton)
+      expect($splitButton.attributes('data-testid')).toBe('split-toggle')
+    })
+  })
 })

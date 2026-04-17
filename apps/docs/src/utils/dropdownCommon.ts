@@ -120,6 +120,12 @@ export const dropdownProps = {
     default: undefined,
     description: 'Text to place in the toggle button, or in the split button is split mode',
   },
+  toggleAttrs: {
+    type: 'Readonly<AttrsValue>',
+    default: undefined,
+    description:
+      'Additional HTML attributes to apply to the toggle button. In split mode, applies to the split toggle button',
+  },
   toggleClass: {
     type: 'ClassValue',
     default: undefined,
