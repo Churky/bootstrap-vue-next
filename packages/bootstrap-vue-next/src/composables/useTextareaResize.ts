@@ -4,7 +4,6 @@ import {
   computed,
   type CSSProperties,
   type MaybeRefOrGetter,
-  nextTick,
   onMounted,
   ref,
   type ShallowRef,
@@ -42,7 +41,7 @@ export const useTextareaResize = (
     computedMinRows.value === computedMaxRows.value ? computedMinRows.value : null
   )
 
-  const handleHeightChange = async () => {
+  const handleHeightChange = () => {
     // Element must be visible (not hidden) and in document
     // Must be checked after above checks
     if (!input.value || !isVisible(input.value)) {
@@ -68,18 +67,13 @@ export const useTextareaResize = (
 
     // Get the current style height (with `px` units)
     const oldHeight = input.value.style.height || computedStyle.height
-    // Probe scrollHeight by temporarily changing the height to `auto`
-    height.value = 'auto'
-    await nextTick() // We need to wait for the dom to update. These cannot be batched in the same tick
-    // Re-check input.value after await since the element may have been unmounted
-    // (e.g., during SSR hydration when BFormGroup re-renders its wrapper element)
-    if (!input.value) return
+    // Probe scrollHeight by temporarily changing the height to `auto` directly on the DOM
+    // to avoid triggering a full Vue re-render (which would reset the textarea value
+    // when debounce is active and modelValue hasn't updated yet).
+    input.value.style.height = 'auto'
     const {scrollHeight} = input.value
-    // Place the original old height back on the element, just in case `computedProp`
-    // returns the same value as before
-    height.value = oldHeight
-    await nextTick() // We need to wait for the dom to update. These cannot be batched in the same tick
-    if (!input.value) return
+    // Restore the original height immediately
+    input.value.style.height = typeof oldHeight === 'string' ? oldHeight : `${oldHeight}px`
 
     // Calculate content height in 'rows' (scrollHeight includes padding but not border)
     const contentRows = Math.max((scrollHeight - padding) / lineHeight, 2)
