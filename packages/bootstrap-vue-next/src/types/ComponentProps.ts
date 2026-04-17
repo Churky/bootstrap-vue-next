@@ -684,7 +684,7 @@ export interface BFormTagsProps {
   addOnChange?: boolean
   autofocus?: boolean
   disabled?: boolean
-  duplicateTagText?: string
+  duplicateTagText?: string | null
   feedbackAriaLive?: AriaAttributes['aria-live']
   form?: string
   ignoreInputFocusSelector?: string | readonly string[]
@@ -692,9 +692,9 @@ export interface BFormTagsProps {
   inputClass?: ClassValue
   inputId?: string
   inputType?: InputType
-  invalidTagText?: string
+  invalidTagText?: string | null
   limit?: Numberish
-  limitTagsText?: string
+  limitTagsText?: string | null
   modelValue?: readonly string[]
   name?: string
   noAddOnEnter?: boolean

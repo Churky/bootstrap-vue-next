@@ -102,10 +102,10 @@ export default {
           description: "When set, enables adding the tag on the input's 'change' event",
         },
         duplicateTagText: {
-          type: 'string',
+          type: 'string | null',
           default: 'Duplicate tag(s)',
           description:
-            'The message when duplicate tags are detected. Set to an empty string to disable the message',
+            'The message when duplicate tags are detected. Set to an empty string or null to disable the message',
         },
         feedbackAriaLive: {
           type: 'string',
@@ -141,10 +141,10 @@ export default {
             "Specifies the type of input to use: 'text', 'email', 'tel', 'url', or 'number'. Default is 'text'",
         },
         invalidTagText: {
-          type: 'string',
+          type: 'string | null',
           default: 'Invalid tag(s)',
           description:
-            'The error message when invalid tags are detected. Set to an empty string to disable the message',
+            'The error message when invalid tags are detected. Set to an empty string or null to disable the message',
         },
         limit: {
           type: 'Numberish',
@@ -153,10 +153,10 @@ export default {
             'The maximum number of tags that can be added. The limit can still be exceeded if manipulated outside of the component',
         },
         limitTagsText: {
-          type: 'string',
+          type: 'string | null',
           default: 'Tag limit reached',
           description:
-            'The message when the limit is reached. Set to an empty string to disable the message',
+            'The message when the limit is reached. Set to an empty string or null to disable the message',
         },
         modelValue: {
           type: 'string[]',

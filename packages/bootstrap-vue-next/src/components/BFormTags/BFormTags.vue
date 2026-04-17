@@ -144,13 +144,16 @@
         </li>
       </ul>
       <div :aria-live="props.feedbackAriaLive" aria-atomic="true">
-        <div v-if="isInvalid" class="d-block invalid-feedback">
+        <div v-if="isInvalid && props.invalidTagText" class="d-block invalid-feedback">
           {{ props.invalidTagText }}: {{ inputValue }}
         </div>
-        <small v-if="isDuplicate" class="form-text text-body-secondary"
+        <small v-if="isDuplicate && props.duplicateTagText" class="form-text text-body-secondary"
           >{{ props.duplicateTagText }}: {{ inputValue }}</small
         >
-        <small v-if="tags.length === props.limit" class="form-text text-body-secondary">
+        <small
+          v-if="tags.length === props.limit && props.limitTagsText"
+          class="form-text text-body-secondary"
+        >
           {{ props.limitTagsText }}</small
         >
       </div>

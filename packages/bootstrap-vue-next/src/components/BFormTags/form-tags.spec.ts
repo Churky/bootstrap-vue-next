@@ -720,6 +720,108 @@ describe('form-tags', () => {
     })
   })
 
+  describe('validation message suppression', () => {
+    it('hides invalid tag text when invalidTagText is empty string', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {
+          tagValidator: (tag: string) => tag.length > 3,
+          invalidTagText: '',
+        },
+      })
+      const input = wrapper.find('.b-form-tags-input')
+      const inputEl = input.element as HTMLInputElement
+
+      inputEl.value = 'ab'
+      await input.trigger('input')
+      await nextTick()
+
+      const invalidFeedback = wrapper.find('.invalid-feedback')
+      expect(invalidFeedback.exists()).toBe(false)
+    })
+
+    it('hides invalid tag text when invalidTagText is null', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {
+          tagValidator: (tag: string) => tag.length > 3,
+          invalidTagText: null,
+        },
+      })
+      const input = wrapper.find('.b-form-tags-input')
+      const inputEl = input.element as HTMLInputElement
+
+      inputEl.value = 'ab'
+      await input.trigger('input')
+      await nextTick()
+
+      const invalidFeedback = wrapper.find('.invalid-feedback')
+      expect(invalidFeedback.exists()).toBe(false)
+    })
+
+    it('hides duplicate tag text when duplicateTagText is empty string', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {
+          modelValue: ['apple'],
+          duplicateTagText: '',
+        },
+      })
+      const input = wrapper.find('.b-form-tags-input')
+      const inputEl = input.element as HTMLInputElement
+
+      inputEl.value = 'apple'
+      await input.trigger('input')
+      await nextTick()
+
+      const duplicateText = wrapper.find('small.form-text')
+      expect(duplicateText.exists()).toBe(false)
+    })
+
+    it('hides duplicate tag text when duplicateTagText is null', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {
+          modelValue: ['apple'],
+          duplicateTagText: null,
+        },
+      })
+      const input = wrapper.find('.b-form-tags-input')
+      const inputEl = input.element as HTMLInputElement
+
+      inputEl.value = 'apple'
+      await input.trigger('input')
+      await nextTick()
+
+      const duplicateText = wrapper.find('small.form-text')
+      expect(duplicateText.exists()).toBe(false)
+    })
+
+    it('hides limit tags text when limitTagsText is empty string', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {
+          modelValue: ['apple', 'orange'],
+          limit: 2,
+          limitTagsText: '',
+        },
+      })
+
+      const limitText = wrapper.findAll('small.form-text')
+      const hasLimitText = limitText.some((el) => el.text() !== '')
+      expect(hasLimitText).toBe(false)
+    })
+
+    it('hides limit tags text when limitTagsText is null', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {
+          modelValue: ['apple', 'orange'],
+          limit: 2,
+          limitTagsText: null,
+        },
+      })
+
+      const limitText = wrapper.findAll('small.form-text')
+      const hasLimitText = limitText.some((el) => el.text() !== '')
+      expect(hasLimitText).toBe(false)
+    })
+  })
+
   describe('removeOnDelete behavior', () => {
     it('does not remove tag on Backspace by default', async () => {
       const wrapper = mount(BFormTags, {

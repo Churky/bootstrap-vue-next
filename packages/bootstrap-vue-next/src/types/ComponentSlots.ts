@@ -440,7 +440,7 @@ export type BFormTagsSlots = {
     addTag: (tag?: string) => void
     disableAddButton: boolean
     disabled: boolean
-    duplicateTagText: string
+    duplicateTagText: string | null
     duplicateTags: string[]
     form: string | undefined
     inputAttrs: Record<string, unknown>
@@ -452,12 +452,12 @@ export type BFormTagsSlots = {
     }
     inputId: string
     inputType: InputType
-    invalidTagText: string
+    invalidTagText: string | null
     invalidTags: string[]
     isDuplicate: boolean
     isInvalid: boolean
     isLimitReached: boolean
-    limitTagsText: string
+    limitTagsText: string | null
     limit: number
     noTagRemove: boolean
     placeholder: string
