@@ -48,6 +48,8 @@
       :key="starIndex"
       class="star"
       @click="selectRating(starIndex)"
+      @mouseenter="onStarHover(starIndex)"
+      @mouseleave="onStarLeave"
     >
       <slot :star-index="starIndex" :is-filled="isIconFull(index)" :is-half="isIconHalf(index)">
         <span class="b-form-rating-star">
@@ -252,6 +254,16 @@ function onKeydown(e: KeyboardEvent) {
 function selectRating(starIndex: number) {
   if (props.readonly || props.disabled) return
   modelValue.value = hoverValue.value !== null ? hoverValue.value : starIndex
+}
+
+function onStarHover(starIndex: number) {
+  if (props.readonly || props.disabled) return
+  hoverValue.value = starIndex
+}
+
+function onStarLeave() {
+  if (props.readonly || props.disabled) return
+  hoverValue.value = null
 }
 
 // clear

@@ -684,6 +684,53 @@ describe('form-rating', () => {
     })
   })
 
+  describe('hover interaction', () => {
+    it('sets hoverValue on star mouseenter', async () => {
+      const wrapper = mount(BFormRating)
+      const stars = wrapper.findAll('.star')
+      await stars[2].trigger('mouseenter')
+      expect(wrapper.vm.hoverValue).toBe(3)
+    })
+
+    it('clears hoverValue on star mouseleave', async () => {
+      const wrapper = mount(BFormRating)
+      const stars = wrapper.findAll('.star')
+      await stars[2].trigger('mouseenter')
+      expect(wrapper.vm.hoverValue).toBe(3)
+      await stars[2].trigger('mouseleave')
+      expect(wrapper.vm.hoverValue).toBeNull()
+    })
+
+    it('does not set hoverValue when readonly', async () => {
+      const wrapper = mount(BFormRating, {props: {readonly: true}})
+      const stars = wrapper.findAll('.star')
+      await stars[2].trigger('mouseenter')
+      expect(wrapper.vm.hoverValue).toBeNull()
+    })
+
+    it('does not set hoverValue when disabled', async () => {
+      const wrapper = mount(BFormRating, {props: {disabled: true}})
+      const stars = wrapper.findAll('.star')
+      await stars[2].trigger('mouseenter')
+      expect(wrapper.vm.hoverValue).toBeNull()
+    })
+
+    it('displays hover state visually (fills stars up to hover)', async () => {
+      const wrapper = mount(BFormRating, {props: {modelValue: 1}})
+      const stars = wrapper.findAll('.star')
+      await stars[3].trigger('mouseenter')
+      // Stars 1-4 should be filled (hoverValue=4)
+      const filledPaths = wrapper.findAll('.b-form-rating-star svg path')
+      // First 4 stars should have the "full" path (M3.612...)
+      const fullStarPath = 'M3.612 15.443'
+      let filledCount = 0
+      for (const path of filledPaths) {
+        if (path.attributes('d')?.startsWith(fullStarPath)) filledCount++
+      }
+      expect(filledCount).toBe(4)
+    })
+  })
+
   describe('expose', () => {
     it('exposes hoverValue ref', () => {
       const wrapper = mount(BFormRating)
