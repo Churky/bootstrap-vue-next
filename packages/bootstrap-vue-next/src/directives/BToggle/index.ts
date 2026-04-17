@@ -110,6 +110,7 @@ const handleUnmount = (
   // Determine targets
   const targets = getTargets(binding, el)
   if (targets.length === 0) return
+
   const provides = findProvides(binding, vnode)
   const showHideMap =
     (provides as Record<symbol, RegisterShowHideValue>)[showHideRegistryKey]?.values ?? null

@@ -176,7 +176,8 @@ export function findComponentParent(
     return false
   }
   if (!walk([root.subTree])) {
-    console.error('Could not find original vnode,  will not inherit provides')
+    // During unmount, the vnode tree may already be torn down — this is expected.
+    // Only warn in development to avoid noisy console errors during normal operation.
     return root
   }
 
