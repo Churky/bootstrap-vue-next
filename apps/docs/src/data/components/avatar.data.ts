@@ -125,7 +125,7 @@ export default {
       },
       emits: {
         'click': {
-          description: 'Emitted when the avatar is clicked'
+          description: 'Emitted when the avatar is clicked',
           args: {
             click: {
               description: 'Native click event',

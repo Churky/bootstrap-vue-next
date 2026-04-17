@@ -155,7 +155,7 @@ export default {
           },
         },
         'prev-click': {
-          description: 'Emitted when the previous slide control is clicked'
+          description: 'Emitted when the previous slide control is clicked',
           args: {
             click: {
               description: 'Native click event',
@@ -164,7 +164,7 @@ export default {
           },
         },
         'next-click': {
-          description: 'Emitted when the next slide control is clicked'
+          description: 'Emitted when the next slide control is clicked',
           args: {
             click: {
               description: 'Native click event',
@@ -257,7 +257,7 @@ export default {
         imgSrcset: {
           type: 'string | string[]',
           default: undefined,
-          description: 'Sets the srcset attribute for the image'
+          description: 'Sets the srcset attribute for the image',
         },
         imgWidth: {
           type: 'Numberish',

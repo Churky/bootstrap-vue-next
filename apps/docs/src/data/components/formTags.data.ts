@@ -161,7 +161,7 @@ export default {
         modelValue: {
           type: 'string[]',
           default: '() => []',
-          description: 'The current value of the tags as an array of strings'
+          description: 'The current value of the tags as an array of strings',
         },
         noAddOnEnter: {
           type: 'boolean',
@@ -207,7 +207,7 @@ export default {
         tagRemovedLabel: {
           type: 'string',
           default: 'Tag removed',
-          description: 'The label for the aria-live region that announces when a tag has been removed'
+          description: 'The label for the aria-live region that announces when a tag has been removed',
         },
         tagValidator: {
           type: '(t: string) => boolean',

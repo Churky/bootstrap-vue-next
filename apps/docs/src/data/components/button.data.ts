@@ -88,7 +88,7 @@ export default {
           description: 'On click event',
           args: {
             click: {
-              description: 'Native click event object'
+              description: 'Native click event object',
               type: 'MouseEvent',
             },
           },

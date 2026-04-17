@@ -146,7 +146,7 @@ export default {
         overlay: {
           type: 'boolean',
           default: false, // TODO item not in string format
-          description: 'When set, applies overlay styling to the card body'
+          description: 'When set, applies overlay styling to the card body',
         },
         text: {
           type: 'string',
@@ -229,7 +229,7 @@ export default {
           placement: {
             type: 'Placement | "overlay"',
             default: 'top',
-            description: 'Placement for the image ("top", "bottom", "start", "end", or "overlay")'
+            description: 'Placement for the image ("top", "bottom", "start", "end", or "overlay")',
           },
         } satisfies PropRecord<Exclude<keyof BCardImgProps, keyof typeof imageProps>>,
         'BImg props': {
