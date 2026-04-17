@@ -89,10 +89,11 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+import {computed, inject, ref} from 'vue'
 import {useDefaults} from '../../composables/useDefaults'
 import {useId} from '../../composables/useId'
 import {useRtl} from '../../composables/useRtl'
+import {inputGroupKey} from '../../utils/keys'
 import type {BFormRatingProps, BFormRatingSlots} from '../../types'
 
 const _props = withDefaults(defineProps<Omit<BFormRatingProps, 'modelValue'>>(), {
@@ -115,6 +116,8 @@ const _props = withDefaults(defineProps<Omit<BFormRatingProps, 'modelValue'>>(),
 })
 const props = useDefaults(_props, 'BFormRating')
 defineSlots<BFormRatingSlots>()
+
+const inInputGroup = inject(inputGroupKey, false)
 
 const modelValue = defineModel<Exclude<BFormRatingProps['modelValue'], undefined>>({default: 0})
 
@@ -146,7 +149,7 @@ const computedClasses = computed(() => ({
   'form-control': true,
   'is-readonly': props.readonly,
   'is-disabled': props.disabled,
-  'no-border': props.noBorder,
+  'no-border': props.noBorder || inInputGroup,
   'b-form-rating': true,
   'd-inline-flex': props.inline,
 }))

@@ -2,6 +2,7 @@ import {enableAutoUnmount, mount} from '@vue/test-utils'
 import {afterEach, describe, expect, it} from 'vitest'
 import {h} from 'vue'
 import BFormRating from './BFormRating.vue'
+import {inputGroupKey} from '../../utils/keys'
 
 describe('form-rating', () => {
   enableAutoUnmount(afterEach)
@@ -681,6 +682,27 @@ describe('form-rating', () => {
       })
       const spans = wrapper.findAll('[data-half]')
       expect(spans[1].attributes('data-half')).toBe('true')
+    })
+  })
+
+  describe('input group integration', () => {
+    it('has no-border class when inside input group', () => {
+      const wrapper = mount(BFormRating, {
+        global: {provide: {[inputGroupKey as unknown as symbol]: true}},
+      })
+      expect(wrapper.classes()).toContain('no-border')
+    })
+
+    it('does not have no-border class when not inside input group', () => {
+      const wrapper = mount(BFormRating)
+      expect(wrapper.classes()).not.toContain('no-border')
+    })
+
+    it('has no-border class when noBorder prop is true even outside input group', () => {
+      const wrapper = mount(BFormRating, {
+        props: {noBorder: true},
+      })
+      expect(wrapper.classes()).toContain('no-border')
     })
   })
 
