@@ -407,6 +407,9 @@ const addTag = (tag?: string): void => {
   inputValue.value = ''
   shouldRemoveOnDelete.value = true
   modelValue.value = newValue
+  if (validTags.length > 0) {
+    emit('tag-added', validTags)
+  }
   focused.value = true
 }
 
@@ -415,6 +418,7 @@ const removeTag = (tag?: string): void => {
   if (tagIndex === -1) return
   lastRemovedTag.value = tags.value.splice(tagIndex, 1).toString()
   modelValue.value = [...tags.value]
+  emit('tag-removed', lastRemovedTag.value)
 }
 
 defineExpose({

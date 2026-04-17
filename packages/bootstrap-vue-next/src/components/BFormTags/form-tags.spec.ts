@@ -822,6 +822,54 @@ describe('form-tags', () => {
     })
   })
 
+  describe('tag-added and tag-removed events', () => {
+    it('emits tag-added with the added tags when a tag is added', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {modelValue: []},
+      })
+      const input = wrapper.find('.b-form-tags-input')
+      const inputEl = input.element as HTMLInputElement
+
+      inputEl.value = 'newtag'
+      await input.trigger('input')
+      await input.trigger('keydown', {key: 'Enter'})
+      await nextTick()
+
+      const emitted = wrapper.emitted('tag-added')
+      expect(emitted).toBeDefined()
+      expect(emitted![0][0]).toEqual(['newtag'])
+    })
+
+    it('does not emit tag-added when adding an invalid tag', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {modelValue: [], tagValidator: (tag: string) => tag.length > 5},
+      })
+      const input = wrapper.find('.b-form-tags-input')
+      const inputEl = input.element as HTMLInputElement
+
+      inputEl.value = 'ab'
+      await input.trigger('input')
+      await input.trigger('keydown', {key: 'Enter'})
+      await nextTick()
+
+      expect(wrapper.emitted('tag-added')).toBeUndefined()
+    })
+
+    it('emits tag-removed with the removed tag when a tag is removed', async () => {
+      const wrapper = mount(BFormTags, {
+        props: {modelValue: ['apple', 'orange']},
+      })
+
+      const tag = wrapper.findComponent(BFormTag)
+      await tag.find('button').trigger('click')
+      await nextTick()
+
+      const emitted = wrapper.emitted('tag-removed')
+      expect(emitted).toBeDefined()
+      expect(emitted![0][0]).toBe('apple')
+    })
+  })
+
   describe('tag removal', () => {
     it('emits new array reference when removing a tag', async () => {
       const wrapper = mount(BFormTags, {

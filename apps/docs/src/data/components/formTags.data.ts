@@ -258,6 +258,24 @@ export default {
             },
           },
         },
+        'tag-added': {
+          description: 'Emitted when one or more tags are successfully added',
+          args: {
+            tags: {
+              type: 'string[]',
+              description: 'Array of newly added tag(s)',
+            },
+          },
+        },
+        'tag-removed': {
+          description: 'Emitted when a tag is removed',
+          args: {
+            tag: {
+              type: 'string',
+              description: 'The tag that was removed',
+            },
+          },
+        },
         'tag-state': {
           description: 'Emitted when tags in the user input are parsed',
           args: {
