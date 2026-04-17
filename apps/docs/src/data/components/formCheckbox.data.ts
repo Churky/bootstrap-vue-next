@@ -165,7 +165,7 @@ export default {
         options: {
           type: 'readonly CheckboxOptionRaw[]',
           default: '() => []',
-          // description: 'Array of options to render as checkboxes in the group' // TODO missing description
+          description: 'Array of options to render as checkboxes in the group'
         },
         reverse: {
           type: 'boolean',

@@ -41,13 +41,13 @@ export default {
         ...pick(buildCommonProps(), ['tag']),
         action: {
           type: 'boolean',
-          default: false, // TODO item not in string format
-          // TODO missing description
+          default: false,
+          description: 'When set, adds action styling to the list group item to indicate it is actionable',
         },
         button: {
           type: 'boolean',
-          default: false, // TODO item not in string format
-          // TODO missing description
+          default: false,
+          description: 'When set, renders the list group item as a button element instead of a list item',
         },
       } satisfies PropRecord<Exclude<keyof BListGroupItemProps, keyof typeof linkProps>>,
       slots: {

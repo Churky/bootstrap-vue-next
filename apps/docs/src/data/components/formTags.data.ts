@@ -160,8 +160,8 @@ export default {
         },
         modelValue: {
           type: 'string[]',
-          default: '() => []', // TODO item not in string format (though string literal, it represents a function)
-          // TODO missing description
+          default: '() => []',
+          description: 'The current value of the tags as an array of strings'
         },
         noAddOnEnter: {
           type: 'boolean',
@@ -207,7 +207,7 @@ export default {
         tagRemovedLabel: {
           type: 'string',
           default: 'Tag removed',
-          // TODO missing description
+          description: 'The label for the aria-live region that announces when a tag has been removed'
         },
         tagValidator: {
           type: '(t: string) => boolean',

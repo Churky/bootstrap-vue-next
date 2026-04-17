@@ -33,7 +33,7 @@ export default {
         formatterFn: {
           type: '(value: number) => string',
           default: undefined,
-          // TODO missing description
+          description: 'A function used to format the displayed value',
         },
         inline: {
           type: 'boolean',
@@ -113,9 +113,9 @@ export default {
           description: 'When set, allows the value to wrap around when reaching min/max bounds',
         },
         modelValue: {
-          // TODO missing description
-          // TODO missing type
-          // TODO missing default
+          description: 'The current value of the spinbutton',
+          type: 'number | null',
+          default: 'null',
         },
       } satisfies PropRecord<keyof BFormSpinbuttonProps>,
       emits: {

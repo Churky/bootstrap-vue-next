@@ -94,7 +94,7 @@ export default {
         header: {
           type: 'string',
           default: undefined,
-          // description: 'Text content for the dropdown group header' // TODO missing description
+          description: 'Text content for the dropdown group header'
         },
       } satisfies PropRecord<keyof BDropdownGroupProps>,
       emits: {},
