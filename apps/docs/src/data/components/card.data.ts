@@ -146,7 +146,7 @@ export default {
         overlay: {
           type: 'boolean',
           default: false, // TODO item not in string format
-          description: 'When set, applies overlay styling to the card body',
+          description: 'When set, renders the card body as a card-img-overlay, positioning content on top of the card image',
         },
         text: {
           type: 'string',
